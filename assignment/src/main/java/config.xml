@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:beans default-autowire="byType" xmlns:p="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
+
+	<p:bean class="hibernate.Customer" name="customer"></p:bean>
+	
+	<p:bean class="spring.CustomerDAOImpl" name="custImpl">
+	</p:bean>
+	
+	<p:bean>
+	</p:bean>
+	
+	<p:bean autowire="no" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<p:property name="annotatedClasses">
+			<p:list>
+				<p:value>spring.CustomerDAOImpl</p:value>
+				<p:value>hibernate.Customer</p:value>
+				<p:value>hibernate.Order</p:value>
+				<p:value>hibernate.LineItem</p:value>
+				<p:value>hibernate.Items</p:value>
+				<p:value>spring.OrderServiceImpl</p:value>
+				<p:value>spring.CustomerService</p:value>
+				<p:value>spring.Inventory</p:value>
+			</p:list>
+		</p:property>
+		<p:property name="dataSource" ref="ds"></p:property>
+		<p:property name="hibernateProperties">
+			<p:props>
+				<p:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</p:prop>
+				<p:prop key="hibernate.hbm2ddl.auto">update</p:prop>
+				<p:prop key="hibernate.show_sql">true</p:prop>
+			</p:props>
+		</p:property>	
+	</p:bean>
+	
+	<p:bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<p:property name="driverClassName" value="org.postgresql.Driver"></p:property>
+		<p:property name="url" value="jdbc:postgresql://localhost:5432/training"></p:property>
+		<p:property name="username" value="postgres"></p:property>
+		<p:property name="password" value="postgres"></p:property>
+	</p:bean>
+</p:beans>

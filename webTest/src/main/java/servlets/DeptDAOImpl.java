@@ -193,6 +193,7 @@ public class DeptDAOImpl implements DeptDAO {
 	        // Choose the comparator based on the selected column
 	        switch (column) {
 	            case "id":
+//	            	comparator = (a,b) -> a.getId() - b.getId();
 	                comparator = Comparator.comparing(Employee::getId);
 	                break;
 	            case "name":
