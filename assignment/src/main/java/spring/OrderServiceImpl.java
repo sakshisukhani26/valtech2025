@@ -7,79 +7,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import hibernate.Customer;
+import hibernate.Customer.CustomerStatus;
 import hibernate.Items;
 import hibernate.LineItem;
 import hibernate.Orders;
 
 public class OrderServiceImpl implements OrderService{
+	@Autowired
 	OrderDAO orderdao = new OrderDAOImpl();
+	@Autowired
     CustomerDAO dao = new CustomerDAOImpl();
-    
+	@Autowired
+	LineItemDAO ltdao = new LineItemDAOImpl();
+    @Autowired
     InventoryService is;
    
     @Autowired
-    private HibernateTemplate hibernateTemplate; 
+    private HibernateTemplate hibernateTemplate;
     
 	@Override
-	public Orders createOrder(Long custId, List<LineItem> lineitem) {
-		Customer customer = dao.get(custId);
-		Orders order = new Orders();
-		order.setCustomer(customer);
-		order.setStatus("NEW");
-		order.setLineItems(lineitem);
-		orderdao.save(order);
-		for(LineItem lineItem : lineitem) {
-			boolean inventoryUpdated = is.updateInventory(lineItem.getId(),lineItem.getQty());
-			if(inventoryUpdated) {
-				lineItem.setOrder(order);
-				hibernateTemplate.save(lineItem);
-				 order.getLineItems().add(lineItem);
-			}else {
-                // Handle cases where stock is not enough, you can log or notify customer
-                System.out.println("Not enough stock for Item ID: " + lineItem.getItem().getId());
-            }
+	public boolean createOrder(Orders order) {
+		String message;
+		if(order.getCustomer().getCustStatus()==CustomerStatus.DISABLED) {
+			message = "User is disabled";
+			return false;
 		}
-		 order.setStatus("Confirmed");
-	     orderdao.update(order);
-
-	     return order;
+		List<LineItem> lt = order.getLineItems(); 
+		System.out.println("lt------------------------"+lt);
+		for(LineItem lineItem : lt) {
+			Items it = lineItem.getItem();
+			System.out.println("id : "+it.getId());
+			System.out.println("----------------"+lineItem.getId());
+			boolean inventoryUpdated = is.updateInventory(it.getId(), lineItem.getQty());
+			if(!inventoryUpdated) {
+				return false;
+			}
+			lineItem.setOrder(order);
+//			ltdao.save(lineItem);
+			is.setCurIfReq(lineItem.getItem().getId());
+		}
+		orderdao.save(order);
+		return true;
+	} 
+	
+	public void setIs(InventoryService is) {
+		this.is = is;
 	}
 	
-	
-//	private List<Orders> orders = new ArrayList<>();
-//    private List<Customer> customers = new ArrayList<>();
-//    private List<Items> items = new ArrayList<>();
-//    OrderDAO order = new OrderDAOImpl();
-//    CustomerDAO dao = new CustomerDAOImpl();
-//	@Override
-//	public Orders createOrder(Long custId, List<LineItem> lineitem) {
-//		Customer customer = dao.get(custId);
-//        if (customer == null) {
-//            throw new RuntimeException("Customer not found");
-//        }
-//
-//		
-//		Orders order = new  Orders();
-//		order.setCustomer((Customer) customers);
-//		order.setStatus("NEW");
-//		 order.setLineItems(lineitem);
-//
-//	        // "Persist" the order to the in-memory list
-//	        orders.add(order);
-//
-////	        for (LineItem lineItem : lineitem) {
-////	            updateInventory(lineItem.getItem(), lineItem.getQty());
-////	        }
-//
-//	        return order;
-//	}
-//	
-////	public void updateInventory(Items item, int quantityOrdered) {
-////        Items existingItem = findItemById(item.getId());
-////        if (existingItem != null) {
-////            existingItem.setQty(existingItem.getQty() - quantityOrdered);
-////        }
-////    }
-//	
+	public void setDao(CustomerDAO dao) {
+		this.dao = dao;
+	}
+	public void setLtdao(LineItemDAO ltdao) {
+		this.ltdao = ltdao;
+	}
+	public void setOrderdao(OrderDAO orderdao) {
+		this.orderdao = orderdao;
+	}
+    
 
 }

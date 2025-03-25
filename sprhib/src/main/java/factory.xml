@@ -4,5 +4,14 @@
 	<p:bean id="p1" class="spring.ioc.PointFactory" factory-method="createPoint" scope="prototype">
 		<!-- <p:property name="x" value=""></p:property> -->
 	</p:bean>
-
+	
+	<p:bean id="pf" class="spring.ioc.PointInstanceFactory">
+		<p:constructor-arg value="10"></p:constructor-arg>
+		<p:constructor-arg value="20"></p:constructor-arg>
+	</p:bean>
+	
+	<p:bean id="p2" factory-bean="pf" factory-method="createPoint">
+		<p:constructor-arg value="120"></p:constructor-arg>
+		<p:constructor-arg value="240"></p:constructor-arg>
+	</p:bean>
 </p:beans>

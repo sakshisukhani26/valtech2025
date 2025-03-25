@@ -23,11 +23,13 @@ public class DeptServlet extends HttpServlet {
 
 	private DeptDAO deptDAO;
 	private EmployeeDAO empDAO;
+	private DeptSortService deptSortService;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		deptDAO = new DeptDAOImpl(config.getServletContext());
 		empDAO = new EmployeeDAOImpl();
+		deptSortService = new DeptSortService();
 //		deptDAO.save(new Dept(1,"HR","Blr"));
 //		deptDAO.save(new Dept(2,"HR","Ahm"));
 //		deptDAO.save(new Dept(3,"Dev","Blr"));
@@ -65,7 +67,7 @@ public class DeptServlet extends HttpServlet {
 //		    order = "asc"; // Change to ascending if currently descending
 //		}
 //		
-		 List<Employee> sortedEmployees = deptDAO.sortEmployees(employeeList,column, order);
+		 List<Employee> sortedEmployees = deptSortService.sortEmployees(employeeList,column, order);
 //		 req.setAttribute("employee", deptDAO.sortEmployees(employeeList,column, order));
 	        // Set sorted employee list as an attribute for JSP
 	        req.setAttribute("employee", sortedEmployees);    

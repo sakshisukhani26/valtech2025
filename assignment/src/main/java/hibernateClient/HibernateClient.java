@@ -8,10 +8,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import hibernate.Customer;
 import hibernate.Items;
 import hibernate.LineItem;
 import hibernate.Orders;
+import hibernate.Orders.Status;
+
+import hibernate.Customer;
 
 public class HibernateClient {
 	public static void main(String[] args) {
@@ -37,7 +39,7 @@ public class HibernateClient {
 //		item.add(new LineItem())
 		Customer c = (Customer) sess.load(Customer.class, 1L);
 		Orders o = new Orders();
-		o.setStatus("new");
+		o.setStatus(Status.ORDERED);
 		o.setCustomer(c);
 		o.setLineItems(null);
 		sess.save(o);

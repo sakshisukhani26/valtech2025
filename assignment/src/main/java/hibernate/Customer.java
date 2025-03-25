@@ -1,6 +1,8 @@
 package hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,16 +20,37 @@ public class Customer {
 	private int age;
 	private String address;
 	private String per_address;
+	@Enumerated(EnumType.STRING)
+	private CustomerStatus custStatus;
+	
+	public enum CustomerStatus{
+		ENABLED,DISABLED
+	}
 	
 	public Customer() {}
 	
-	public Customer(String name, int age, String address, String per_address) {
+	public Customer(String name, int age, String address, String per_address,CustomerStatus custStatus) {
 		this.name = name;
 		this.age = age;
 		this.address = address;
 		this.per_address = per_address;
+		this.custStatus = custStatus;
 	}
 	
+	public CustomerStatus getCustStatus() {
+		return custStatus;
+	}
+
+	public void setCustStatus(CustomerStatus custStatus) {
+		this.custStatus = custStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", per_address="
+				+ per_address + "]";
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -10,5 +10,6 @@ public class FactoryClient {
 		System.out.println(ctx.getBean("p1"));
 		System.out.println(ctx.getBean("p1"));
 		System.out.println(ctx.getBean("p1") == ctx.getBean("p1"));
+		System.out.println(ctx.getBean("p2"));
 	}
 }

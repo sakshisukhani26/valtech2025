@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+
 import hibernate.Customer;
 import hibernate.Orders;
 
@@ -38,7 +39,7 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 
 	@Override
-	public Orders get(long id) {
+	public Orders get(int id) {
 		return new HibernateTemplate(sessionFactory).load(Orders.class, id);
 		
 	}

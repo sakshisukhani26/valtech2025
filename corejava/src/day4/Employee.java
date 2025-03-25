@@ -1,6 +1,8 @@
 package day4;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class Employee implements Comparable<Employee>{
@@ -12,6 +14,7 @@ public class Employee implements Comparable<Employee>{
 	private Gender gender;
 	private int level;
 	private int experience;
+//	public static List<Employee> employee = new ArrayList<Employee>();
 	
 	
 	public enum Gender{
@@ -134,6 +137,7 @@ public class Employee implements Comparable<Employee>{
 			this.emp=emp;
 		}
 		public Employee build() {
+//			employee.add(emp);
 			return emp;
 		}
 		public EmployeeBuilder id(int id) {

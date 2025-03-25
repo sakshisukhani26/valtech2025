@@ -58,7 +58,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	public void update(Employee e) {
 		try(Connection con= getConnection()){
 			PreparedStatement ps= con.prepareStatement
-					("UPDATE EMPLOYEE SET NAME=?,AGE=?,GENDER=?,SALARY=?,EXPERIENCE=?,LEVEL=? WHERE ID= ?");
+					("UPDATE EMPLOYEE SET NAME=?,AGE=?,GENDER=?,SALARY=?,EXPERIENCE=?,LEVEL=?,DEPT_ID=? WHERE ID= ?");
 			setValuesToPreparedStatement(e, ps);
 			int rowsAffected= ps.executeUpdate();
 			System.out.println("Rows Updated = "+rowsAffected);

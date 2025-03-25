@@ -7,6 +7,8 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import hibernate.Items;
 
+
+
 public class ItemDAOImpl implements ItemDAO{
 
 	@Autowired

@@ -1,13 +1,15 @@
 package hibernate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.swing.plaf.basic.BasicBorders;
 
+@Entity
 public class LineItem {
 
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "lineseq")
@@ -17,11 +19,16 @@ public class LineItem {
 	@JoinColumn(name = "order_id", referencedColumnName = "id")
 	private Orders order;
 	private int qty;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "item_id", referencedColumnName = "id")
 	private Items item;
 	
 	public LineItem() {}
+
+	@Override
+	public String toString() {
+		return "LineItem [id=" + id + ", order=" + order + ", qty=" + qty + ", item=" + item + "]";
+	}
 
 	public LineItem(int qty) {
 		this.qty = qty;

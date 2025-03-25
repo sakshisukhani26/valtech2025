@@ -28,6 +28,12 @@ public class Items {
 		this.max_qty = max_qty;
 	}
 
+	@Override
+	public String toString() {
+		return "Items [id=" + id + ", name=" + name + ", description=" + description + ", qty=" + qty + ", reorder_qty="
+				+ reorder_qty + ", max_qty=" + max_qty + "]";
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -11,6 +11,7 @@ import hibernate.Customer;
 public class CustomerDAOImpl implements CustomerDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

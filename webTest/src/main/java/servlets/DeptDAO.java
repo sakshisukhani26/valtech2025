@@ -26,6 +26,5 @@ public interface DeptDAO {
 	
 	List<Employee> showEmployeeByDeptId(int id);
 	
-	List<Employee> sortEmployees(List<Employee> employeeList,String column, String order);
 
 }

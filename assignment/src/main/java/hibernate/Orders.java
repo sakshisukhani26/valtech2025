@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import hibernate.Customer;
 
 @Entity
 public class Orders {
@@ -25,12 +29,29 @@ public class Orders {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<LineItem> lineItems;
 
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	
+	public enum Status{
+		ORDERED,PACKED,SHIPPED,DELIEVERD,CANCELLED
+	}
 	public Orders() {}
-	
-	public Orders(String status) {
+
+	public Orders(Status status) {
 		this.status = status;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", customer=" + customer + ", lineItems=" + lineItems + ", status=" + status + "]";
 	}
 
 	public List<LineItem> getLineItems() {
@@ -52,12 +73,6 @@ public class Orders {
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 	
