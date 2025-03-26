@@ -2,10 +2,10 @@ package com.valtech.training.loanservice.webservices;
 
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.valtech.training.loanservice.Loan;
 import com.valtech.training.loanservice.services.LoanService;
-
-import jakarta.jws.WebService;
 
 @WebService(endpointInterface = "com.valtech.training.loanservice.webservices.LoanServiceWS",name="LoanService",portName = "LoanServicePort")
 public class LoanServiceWSImpl implements LoanServiceWS{

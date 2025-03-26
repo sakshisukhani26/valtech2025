@@ -12,4 +12,8 @@ public interface LoanService {
 
 	Loan getLoan(long id);
 
+	Loan processLoan(Loan loan);
+
+	Loan applyLoan(Loan loan);
+
 }

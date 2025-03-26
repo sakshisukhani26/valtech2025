@@ -1,16 +1,8 @@
 package com.valtech.training.loanservice;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
-@Entity
 public class Loan {
 
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "loan_seq")
-	@SequenceGenerator(name="loan_seq",sequenceName = "loan_seq")
 	private long id;
 	private String name;
 	private int income;   
@@ -20,9 +12,8 @@ public class Loan {
 	private loanType loanType;
 	private String asset;
 	private int assetValue;
-	private String aadharNumber;
-	private String panCard;
-	
+	private long aadharNumber;
+	private long panCard;
 	
 	public enum loanStatus{
 		APPLIED,APPROVED,REJECTED
@@ -31,13 +22,12 @@ public class Loan {
 	public enum loanType{
 		HOME,CAR
 	}
-	
+
 	public Loan() {}
 
-	
 	public Loan(String name, int income, int cibilScore, loanStatus status, int loanAmount,
-			loanType loanType, String asset, int assetValue, String aadharNumber,
-			String panCard) {
+			loanType loanType, String asset, int assetValue,
+			long aadharNumber, long panCard) {
 		this.name = name;
 		this.income = income;
 		this.cibilScore = cibilScore;
@@ -50,29 +40,11 @@ public class Loan {
 		this.panCard = panCard;
 	}
 
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAadharNumber() {
-		return aadharNumber;
-	}
-
-	public void setAadharNumber(String aadharNumber) {
-		this.aadharNumber = aadharNumber;
-	}
-
-	public String getPanCard() {
-		return panCard;
-	}
-
-	public void setPanCard(String panCard) {
-		this.panCard = panCard;
+	@Override
+	public String toString() {
+		return "Loan [id=" + id + ", name=" + name + ", income=" + income + ", cibilScore=" + cibilScore + ", status="
+				+ status + ", loanAmount=" + loanAmount + ", loanType=" + loanType + ", asset=" + asset
+				+ ", assetValue=" + assetValue + ", aadharNumber=" + aadharNumber + ", panCard=" + panCard + "]";
 	}
 
 	public long getId() {
@@ -81,6 +53,14 @@ public class Loan {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getIncome() {
@@ -138,7 +118,23 @@ public class Loan {
 	public void setAssetValue(int assetValue) {
 		this.assetValue = assetValue;
 	}
+
+	public long getAadharNumber() {
+		return aadharNumber;
+	}
+
+	public void setAadharNumber(long aadharNumber) {
+		this.aadharNumber = aadharNumber;
+	}
+
+	public long getPanCard() {
+		return panCard;
+	}
+
+	public void setPanCard(long panCard) {
+		this.panCard = panCard;
+	}
 	
 	
-	                                
+	
 }
