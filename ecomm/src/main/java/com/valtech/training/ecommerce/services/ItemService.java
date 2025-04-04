@@ -10,8 +10,8 @@ public interface ItemService {
 
 	void deleteItem(ItemVO itemVO);
 
-	List<ItemVO> getAll();
+	List<ItemVO> getAllItems();
 
-	ItemVO getById(long id);
+	ItemVO getItem(long id);
 
 }

@@ -12,4 +12,6 @@ public interface CustomerService {
 
 	CustomerVO disableCustomer(CustomerVO cust);
 
+	CustomerVO getCustomer(long id);
+
 }

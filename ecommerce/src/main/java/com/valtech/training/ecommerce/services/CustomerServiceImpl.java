@@ -30,6 +30,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
+	public CustomerVO getCustomer(long id) {
+		return CustomerVO.from(customerRepo.getReferenceById(id));
+	}
+	
+	@Override
 	public CustomerVO enableCustomer(CustomerVO cust) {
 		Customer c = cust.to();
 		c.setCustStatus(CustomerStatus.ENABLED);

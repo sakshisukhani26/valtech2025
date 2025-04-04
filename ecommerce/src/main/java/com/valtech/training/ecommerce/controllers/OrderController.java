@@ -38,30 +38,33 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order")
-	public String createOrder(@ModelAttribute LineItemVO lineItemVO,Model model) {
+	public String createOrder(@ModelAttribute OrderVO vo,Model model) {
 //		System.out.println(orderItemVO.getIds());
 //		List<Long> ids = (List<Long>) model.getAttribute("itemIds");
 //		List<Integer> qty = (List<Integer>) model.getAttribute("itemQty");
-		List<LineItemVO> lt = (List<LineItemVO>) model.getAttribute("lineItem");
+//		List<LineItemVO> lt = (List<LineItemVO>) model.getAttribute("lineItem");
 		
 //		if(ids == null) ids = new ArrayList<Long>();
 //		if(qty == null) qty = new ArrayList<Integer>();
-		if(lt == null) lt = new ArrayList<LineItemVO>();
+//		if(lt == null) lt = new ArrayList<LineItemVO>();
 		
 //		System.out.println("-----------"+orderItemVO.getIds());
 //		ids.add(orderItemVO.getIds());
 //		qty.add(orderItemVO.getQty());
-		lt.add(lineItemVO);
+//		lt.add(lineItemVO);
 		
 //		model.addAttribute("itemIds",ids);
 //		model.addAttribute("itemQty",qty);
-		model.addAttribute("item",itemService.getAll());
+//		model.addAttribute("item",itemService.getAll());
+		System.out.println("vo---------"+vo);
+		orderService.createOrder(vo);
 		return "order";
 	}
 	
 	@PostMapping("/handleClick")
 	public String handleClick(@RequestParam("userId") long userId,@ModelAttribute ItemVO item) {
-		System.out.println("ewjhfdskjhfedsujfdewslo"+userId+item.getQty());
+		System.out.println("id "+userId+item.getQty());
+		
 		return "order";
 	}
 }

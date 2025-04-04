@@ -10,29 +10,28 @@
 <body>
 <%-- ${customer.name} --%>
 
-	<table>
-	<form action="handleClick" method="post">
+		<table>
+
 		<tr>
 			<td>ID</td>
 			<td>Name</td>
 			<td>Description</td>
-			<td>Set Quantity</td>
 		</tr>
 		<c:forEach items="${item}" var="i">
 			<tr>
 				<td>${i.id}</td>
 				<td>${i.name}</td>
 				<td>${i.description}</td>
-				<td><input type = "text" name="qty" id = "qty"/></td>
-				<td>
-				<input type="hidden" name="userId" value="${i.id}"/>
-				<input type = "submit" name="${i.id}" value="add"/>
-				</td>
 			</tr>
 		</c:forEach>
-		<tr>
-		</tr>
-		
+		</table>
+		<br/>
+		<form action="order" method="post">
+		Order Id : <input type="text" name="id">
+		Customer Id : <input type="text" name="custId"><br/><br/>
+		Item Id : <input type="text" name="itemId"><br/><br/>
+		Quantity : <input type="text" name="qty"><br/><br/>
+		<input type = "submit" value="Submit"/>
 		<%-- <h2>Place orders</h2>
 		
 		<tr>
@@ -57,7 +56,7 @@
 		</tr>
 		</c:forEach> --%>
 		</form>
-	</table>
+	
 	
 	
 </body>

@@ -1,5 +1,6 @@
 package com.valtech.training.ecommerce.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -33,6 +34,18 @@ public class Orders {
 	public enum Status{
 		ORDERED,PACKED,SHIPPED,DELIEVERD,CANCELLED
 	}
+	
+	public void addLineOrderItem(LineItem loi) {
+		if(lineItems == null ) lineItems = new ArrayList<LineItem>();
+		lineItems.add(loi);
+		loi.setOrder(this);
+	}
+	
+	public void removeLineOrderItem(LineItem loi) {
+		lineItems.remove(loi);
+		loi.setOrder(this);
+	}
+	
 	public Orders() {}
 
 	public Orders(Status status) {

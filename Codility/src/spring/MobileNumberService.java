@@ -23,7 +23,8 @@ public class MobileNumberService {
         
         if (number.length() <= 3) {
             score += 3; // Easier to remember
-        } else if (number.length() <= 5) {
+        } 
+        else if (number.length() <= 5) {
             score += 2; // Moderate
         } else {
             score += 1; // Harder to remember

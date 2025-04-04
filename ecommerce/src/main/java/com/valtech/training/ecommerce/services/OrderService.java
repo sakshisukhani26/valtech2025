@@ -10,7 +10,7 @@ public interface OrderService {
 
 	public boolean createOrder(OrderVO order);
 
-	List<Long> getListofLineItemsIds(List<LineItem> items);
-
-	List<Integer> getListofLineItemsQty(List<LineItem> items);
+//	List<Long> getListofLineItemsIds(List<LineItem> items);
+//
+//	List<Integer> getListofLineItemsQty(List<LineItem> items);
 }

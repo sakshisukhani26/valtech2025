@@ -27,8 +27,9 @@ public class ItemVO {
 	}
 	
 	public Items to() {
-		
-		return new Items(name,description,qty,reorderQty,maxQty);
+		Items i = new Items(name,description,qty,reorderQty,maxQty);
+		i.setId(id);
+		return i;
 	}
 
 	public long getId() {
